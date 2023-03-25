@@ -1,0 +1,23 @@
+{
+  "name": "homebridge-smallgarage",
+  "version": "1.0.0",
+  "description": "Small",
+  "main": "smallgarage_door.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://donie@bitbucket.org/donie/raspberry-gate-server.git"
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": "Donie Kelly",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/donie/raspberry-gate-server#readme"
+}

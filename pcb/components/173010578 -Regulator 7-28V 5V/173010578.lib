@@ -1,0 +1,29 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# 173010578
+#
+DEF 173010578 PS 0 40 Y Y 1 L N
+F0 "PS" -400 250 50 H V L BNN
+F1 "173010578" -400 -300 50 H V L BNN
+F2 "CONV_173010578" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "Switching regulator module - DC/DC converter . Single Output. 7.0V to 28.0V input voltage range and 5 V output voltage range" 0 0 50 H I L BNN "DESCRIPTION"
+F5 "173010578" 0 0 50 H I L BNN "MP"
+F6 "None" 0 0 50 H I L BNN "PRICE"
+F7 "Unavailable" 0 0 50 H I L BNN "AVAILABILITY"
+F8 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
+F9 "Wurth Electronics" 0 0 50 H I L BNN "MF"
+F10 "SIP-3 Wurth" 0 0 50 H I L BNN "PACKAGE"
+F11 "1.0" 0 0 50 H I L BNN "PARTREV"
+DRAW
+S -400 -200 400 200 0 0 10 f
+X VIN 1 -600 100 200 R 40 40 0 0 I 
+X VOUT 3 600 100 200 L 40 40 0 0 O 
+X GND 2 600 -100 200 L 40 40 0 0 W 
+ENDDRAW
+ENDDEF
+#
+# End Library

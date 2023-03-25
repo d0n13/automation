@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MCP23009-E_SS
+D Microchip MCP23009-E/SS, 8-channel 8bit I/O Expander 3.4MHz, I2C, 20-Pin SSOP
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/20002121C.pdf
+$ENDCMP
+#
+#End Doc Library

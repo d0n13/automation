@@ -1,0 +1,591 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 5 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCP23009-E_SS:MCP23009-E_SS IC?
+U 1 1 613A15DE
+P 3500 2050
+AR Path="/613A15DE" Ref="IC?"  Part="1" 
+AR Path="/613934C7/613A15DE" Ref="IC1"  Part="1" 
+F 0 "IC1" H 4100 2315 50  0000 C CNN
+F 1 "MCP23009-E_SS" H 4100 2224 50  0001 C CNN
+F 2 "SOP65P780X200-20N" H 4550 2150 50  0001 L CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20002121C.pdf" H 4550 2050 50  0001 L CNN
+F 4 "Microchip MCP23009-E/SS, 8-channel 8bit I/O Expander 3.4MHz, I2C, 20-Pin SSOP" H 4550 1950 50  0001 L CNN "Description"
+F 5 "2" H 4550 1850 50  0001 L CNN "Height"
+F 6 "Microchip" H 4550 1750 50  0001 L CNN "Manufacturer_Name"
+F 7 "MCP23009-E/SS" H 4550 1650 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "579-MCP23009-E/SS" H 4550 1550 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.co.uk/ProductDetail/Microchip-Technology/MCP23009-E-SS/?qs=WqWCsLCZBkoSJmmWr%252BjI%2FA%3D%3D" H 4550 1450 50  0001 L CNN "Mouser Price/Stock"
+F 10 "MCP23009-E/SS" H 4550 1350 50  0001 L CNN "Arrow Part Number"
+F 11 "https://www.arrow.com/en/products/mcp23009-ess/microchip-technology" H 4550 1250 50  0001 L CNN "Arrow Price/Stock"
+	1    3500 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 613A15E4
+P 4850 2050
+AR Path="/613A15E4" Ref="#PWR?"  Part="1" 
+AR Path="/613934C7/613A15E4" Ref="#PWR019"  Part="1" 
+F 0 "#PWR019" H 4850 1800 50  0001 C CNN
+F 1 "GND" H 4855 1877 50  0000 C CNN
+F 2 "" H 4850 2050 50  0001 C CNN
+F 3 "" H 4850 2050 50  0001 C CNN
+	1    4850 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 2050 4850 2050
+$Comp
+L Device:R R?
+U 1 1 613A1603
+P 2050 2250
+AR Path="/613A1603" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A1603" Ref="R1"  Part="1" 
+F 0 "R1" H 2120 2296 50  0000 L CNN
+F 1 "1K" H 2120 2205 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 1980 2250 50  0001 C CNN
+F 3 "~" H 2050 2250 50  0001 C CNN
+	1    2050 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 613A1609
+P 2050 2650
+AR Path="/613A1609" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A1609" Ref="R2"  Part="1" 
+F 0 "R2" H 2120 2696 50  0000 L CNN
+F 1 "15K" H 2120 2605 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 1980 2650 50  0001 C CNN
+F 3 "~" H 2050 2650 50  0001 C CNN
+	1    2050 2650
+	1    0    0    -1  
+$EndComp
+NoConn ~ 4700 2150
+NoConn ~ 4700 2250
+NoConn ~ 4700 2950
+Wire Wire Line
+	2050 2450 2050 2400
+Wire Wire Line
+	2050 2500 2050 2450
+Connection ~ 2050 2450
+NoConn ~ 3500 2150
+NoConn ~ 3500 2950
+Wire Wire Line
+	3300 2250 3500 2250
+Wire Wire Line
+	3300 2350 3500 2350
+Wire Wire Line
+	2300 2550 2300 2050
+Connection ~ 2300 2050
+Wire Wire Line
+	2300 2050 2300 1800
+Wire Wire Line
+	2050 2100 2050 2050
+$Comp
+L Connector_Generic:Conn_01x02 CN?
+U 1 1 613A1635
+P 2600 3950
+AR Path="/613A1635" Ref="CN?"  Part="1" 
+AR Path="/613934C7/613A1635" Ref="CN7"  Part="1" 
+F 0 "CN7" H 2600 3750 50  0000 C CNN
+F 1 "Gate Controller CN1" H 2518 3616 50  0001 C CNN
+F 2 "Connector_JST:JST_EH_S2B-EH_1x02_P2.50mm_Horizontal" H 2600 3950 50  0001 C CNN
+F 3 "~" H 2600 3950 50  0001 C CNN
+	1    2600 3950
+	-1   0    0    1   
+$EndComp
+$Comp
+L FDC6561AN:FDC6561AN Q?
+U 1 1 613A163B
+P 6350 1850
+AR Path="/613A163B" Ref="Q?"  Part="1" 
+AR Path="/613934C7/613A163B" Ref="Q1"  Part="1" 
+F 0 "Q1" H 6448 1896 50  0000 L CNN
+F 1 "FDC6561AN" H 6448 1805 50  0000 L CNN
+F 2 "SSOT-6" H 6350 1850 50  0001 L BNN
+F 3 "" H 6350 1850 50  0001 C CNN
+	1    6350 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 613A1641
+P 5800 1900
+AR Path="/613A1641" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A1641" Ref="R7"  Part="1" 
+F 0 "R7" V 5900 1900 50  0000 C CNN
+F 1 "10k" V 5900 2050 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 5730 1900 50  0001 C CNN
+F 3 "~" H 5800 1900 50  0001 C CNN
+	1    5800 1900
+	1    0    0    1   
+$EndComp
+Text GLabel 5000 7350 2    39   Input ~ 0
+START
+Text GLabel 5000 7250 2    39   Input ~ 0
+PEDST
+Text GLabel 5000 7150 2    39   Input ~ 0
+STOP
+Text GLabel 5000 6950 2    39   Input ~ 0
+GND
+Wire Wire Line
+	6350 1650 6350 1600
+Wire Wire Line
+	6350 1600 6850 1600
+Text GLabel 6850 1600 2    39   Input ~ 0
+START
+$Comp
+L FDC6561AN:FDC6561AN Q?
+U 2 1 613A1650
+P 6600 2200
+AR Path="/613A1650" Ref="Q?"  Part="2" 
+AR Path="/613934C7/613A1650" Ref="Q1"  Part="2" 
+F 0 "Q1" H 6698 2246 50  0000 L CNN
+F 1 "FDC6561AN" H 6698 2155 50  0000 L CNN
+F 2 "SSOT-6" H 6600 2200 50  0001 L BNN
+F 3 "" H 6600 2200 50  0001 C CNN
+	2    6600 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 613A1656
+P 5600 1900
+AR Path="/613A1656" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A1656" Ref="R6"  Part="1" 
+F 0 "R6" V 5700 1900 50  0000 C CNN
+F 1 "10k" V 5700 2050 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 5530 1900 50  0001 C CNN
+F 3 "~" H 5600 1900 50  0001 C CNN
+	1    5600 1900
+	1    0    0    1   
+$EndComp
+$Comp
+L FDC6561AN:FDC6561AN Q?
+U 1 1 613A165C
+P 6900 2550
+AR Path="/613A165C" Ref="Q?"  Part="1" 
+AR Path="/613934C7/613A165C" Ref="Q2"  Part="1" 
+F 0 "Q2" H 6998 2596 50  0000 L CNN
+F 1 "FDC6561AN" H 6998 2505 50  0000 L CNN
+F 2 "SSOT-6" H 6900 2550 50  0001 L BNN
+F 3 "" H 6900 2550 50  0001 C CNN
+	1    6900 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 613A1662
+P 5400 1900
+AR Path="/613A1662" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A1662" Ref="R5"  Part="1" 
+F 0 "R5" V 5500 1900 50  0000 C CNN
+F 1 "10k" V 5500 2050 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 5330 1900 50  0001 C CNN
+F 3 "~" H 5400 1900 50  0001 C CNN
+	1    5400 1900
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	4700 2350 5400 2350
+Wire Wire Line
+	4700 2450 5600 2450
+Wire Wire Line
+	6200 2550 6200 2650
+Wire Wire Line
+	6200 2650 6700 2650
+Wire Wire Line
+	6000 1950 6150 1950
+Wire Wire Line
+	5600 2450 5600 2050
+Wire Wire Line
+	5400 2350 5400 2050
+Wire Wire Line
+	6600 2400 6600 2750
+Wire Wire Line
+	6600 2750 6350 2750
+Wire Wire Line
+	6900 2750 6600 2750
+Connection ~ 6600 2750
+Wire Wire Line
+	6350 2050 6350 2750
+Wire Wire Line
+	6600 2000 6600 1950
+Wire Wire Line
+	6600 1950 7100 1950
+Wire Wire Line
+	6900 2350 6900 2300
+Wire Wire Line
+	6900 2300 7250 2300
+Text GLabel 7100 1950 2    39   Input ~ 0
+PEDST
+Text GLabel 7250 2300 2    39   Input ~ 0
+STOP
+Connection ~ 5400 2350
+Wire Wire Line
+	5800 2550 6200 2550
+Wire Wire Line
+	4700 2550 5800 2550
+Wire Wire Line
+	5800 2050 5800 2550
+Wire Wire Line
+	5400 2350 6000 2350
+Wire Wire Line
+	5400 1650 5600 1650
+Wire Wire Line
+	5800 1650 5800 1750
+Wire Wire Line
+	5400 1650 5400 1750
+Wire Wire Line
+	5600 1650 5600 1750
+Connection ~ 5600 1650
+Wire Wire Line
+	5600 1650 5800 1650
+NoConn ~ 3500 2650
+Text GLabel 5000 7050 2    39   Input ~ 0
+GND
+Text GLabel 5000 6850 2    39   Input ~ 0
+GND
+Text GLabel 5000 6750 2    39   Input ~ 0
+24V(FL)
+Connection ~ 5800 2550
+Wire Wire Line
+	6000 1950 6000 2350
+Wire Wire Line
+	5600 2450 6100 2450
+Wire Wire Line
+	6100 2450 6100 2300
+Wire Wire Line
+	6100 2300 6400 2300
+Connection ~ 5600 2450
+$Comp
+L Device:R R?
+U 1 1 613A1738
+P 3150 3550
+AR Path="/613A1738" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A1738" Ref="R4"  Part="1" 
+F 0 "R4" V 3250 3550 50  0000 C CNN
+F 1 "10k" V 3250 3700 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 3080 3550 50  0001 C CNN
+F 3 "~" H 3150 3550 50  0001 C CNN
+	1    3150 3550
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 613A173E
+P 2950 3550
+AR Path="/613A173E" Ref="R?"  Part="1" 
+AR Path="/613934C7/613A173E" Ref="R3"  Part="1" 
+F 0 "R3" V 3050 3550 50  0000 C CNN
+F 1 "10k" V 3050 3700 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 2880 3550 50  0001 C CNN
+F 3 "~" H 2950 3550 50  0001 C CNN
+	1    2950 3550
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	2950 3400 2950 3350
+Wire Wire Line
+	3150 3400 3150 3350
+Wire Wire Line
+	3150 3700 3150 3850
+Wire Wire Line
+	3350 3850 3350 2750
+Wire Wire Line
+	3350 2750 3500 2750
+Wire Wire Line
+	3500 2850 3450 2850
+Wire Wire Line
+	3450 2850 3450 3950
+NoConn ~ 4700 2850
+NoConn ~ 4700 2750
+NoConn ~ 4700 2650
+NoConn ~ 4350 1000
+Text GLabel 2450 1800 2    50   Input ~ 0
+LeftPost_3.3V
+Wire Wire Line
+	2300 2550 3500 2550
+Wire Wire Line
+	2300 2050 3500 2050
+Wire Wire Line
+	2050 2050 2300 2050
+Wire Wire Line
+	2050 2450 3500 2450
+Text GLabel 3300 2250 0    50   Input ~ 0
+LeftPost_SCL1
+Text GLabel 3300 2350 0    50   Input ~ 0
+LeftPost_SDA1
+Wire Wire Line
+	2450 1800 2300 1800
+Text GLabel 5700 1350 2    50   Input ~ 0
+LeftPost_3.3V
+Wire Wire Line
+	5600 1650 5600 1350
+Wire Wire Line
+	5600 1350 5700 1350
+Text GLabel 2900 3200 0    50   Input ~ 0
+LeftPost_3.3V
+Wire Wire Line
+	2950 3350 3050 3350
+Wire Wire Line
+	2900 3200 3050 3200
+Wire Wire Line
+	3050 3200 3050 3350
+Connection ~ 3050 3350
+Wire Wire Line
+	3050 3350 3150 3350
+Wire Wire Line
+	2950 3700 2950 3950
+Wire Wire Line
+	2800 3950 2950 3950
+Connection ~ 2950 3950
+Wire Wire Line
+	2800 3850 3150 3850
+Connection ~ 3150 3850
+Wire Wire Line
+	3150 3850 3350 3850
+Wire Wire Line
+	2950 3950 3450 3950
+Text GLabel 4850 4650 2    50   Input ~ 0
+LeftPost_Light_12v
+Text GLabel 4850 4750 2    50   Input ~ 0
+LeftPost_GND
+Text GLabel 4850 4850 2    50   Input ~ 0
+LeftPost_SCL1
+Text GLabel 4850 4950 2    50   Input ~ 0
+LeftPost_SDA1
+Text GLabel 4850 5050 2    50   Input ~ 0
+LeftPost_CN1_24v(FL)
+Text Notes 6050 4350 2    39   ~ 0
+CAT-5 cable from raspberry controller
+Text GLabel 4850 4550 2    50   Input ~ 0
+LeftPost_3.3V
+Wire Notes Line
+	4700 5250 4700 4200
+Wire Notes Line
+	4700 4200 6100 4200
+Wire Notes Line
+	6100 4200 6100 5250
+Wire Notes Line
+	6100 5250 4700 5250
+Wire Wire Line
+	4600 4750 4850 4750
+Wire Wire Line
+	4600 4750 4600 5150
+Connection ~ 4600 5150
+$Comp
+L power:GND #PWR?
+U 1 1 61478E35
+P 4600 5200
+AR Path="/61478E35" Ref="#PWR?"  Part="1" 
+AR Path="/613934C7/61478E35" Ref="#PWR0101"  Part="1" 
+F 0 "#PWR0101" H 4600 4950 50  0001 C CNN
+F 1 "GND" H 4605 5027 50  0000 C CNN
+F 2 "" H 4600 5200 50  0001 C CNN
+F 3 "" H 4600 5200 50  0001 C CNN
+	1    4600 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4600 5200 4600 5150
+$Comp
+L power:GND #PWR?
+U 1 1 6147BB03
+P 6600 2850
+AR Path="/6147BB03" Ref="#PWR?"  Part="1" 
+AR Path="/613934C7/6147BB03" Ref="#PWR0102"  Part="1" 
+F 0 "#PWR0102" H 6600 2600 50  0001 C CNN
+F 1 "GND" H 6605 2677 50  0000 C CNN
+F 2 "" H 6600 2850 50  0001 C CNN
+F 3 "" H 6600 2850 50  0001 C CNN
+	1    6600 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6147C1F0
+P 2050 2900
+AR Path="/6147C1F0" Ref="#PWR?"  Part="1" 
+AR Path="/613934C7/6147C1F0" Ref="#PWR0103"  Part="1" 
+F 0 "#PWR0103" H 2050 2650 50  0001 C CNN
+F 1 "GND" H 2055 2727 50  0000 C CNN
+F 2 "" H 2050 2900 50  0001 C CNN
+F 3 "" H 2050 2900 50  0001 C CNN
+	1    2050 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 2900 2050 2800
+Wire Wire Line
+	6600 2850 6600 2750
+$Comp
+L Connector_Generic:Conn_01x07 CN2
+U 1 1 614999CE
+P 3650 7050
+F 0 "CN2" H 3730 7092 50  0000 L CNN
+F 1 "Gate Controller CN2" H 3730 7001 50  0000 L CNN
+F 2 "Connector_JST:JST_EH_B8B-EH-A_1x08_P2.50mm_Vertical" H 3650 7050 50  0001 C CNN
+F 3 "~" H 3650 7050 50  0001 C CNN
+	1    3650 7050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4800 6850 5000 6850
+Wire Wire Line
+	5000 7050 4800 7050
+Wire Wire Line
+	4800 7050 4800 6950
+Connection ~ 4800 6950
+Wire Wire Line
+	4800 6950 5000 6950
+Wire Wire Line
+	4800 6950 4800 6850
+Text Notes 6050 5700 2    39   ~ 0
+CAT-5 cable from left post
+Wire Notes Line
+	4700 6600 4700 5550
+Wire Notes Line
+	4700 5550 6100 5550
+Wire Notes Line
+	4700 6600 6100 6600
+Wire Notes Line
+	6100 5550 6100 6600
+Text GLabel 4850 5850 2    50   Input ~ 0
+LeftPost_Light_12v
+Wire Wire Line
+	4300 4650 4300 5850
+Wire Wire Line
+	4300 5850 4850 5850
+Wire Wire Line
+	4300 4650 4850 4650
+Text GLabel 4850 5950 2    50   Input ~ 0
+LeftPost_GND
+Wire Wire Line
+	4850 5950 4400 5950
+Wire Wire Line
+	4400 5950 4400 5150
+Wire Wire Line
+	4400 5150 4600 5150
+Text GLabel 4850 6050 2    50   Input ~ 0
+LeftPost_CN1_24v(FL)
+Wire Wire Line
+	4850 6050 4500 6050
+Wire Wire Line
+	4150 6050 4150 5050
+Wire Wire Line
+	4150 5050 4850 5050
+Text GLabel 4850 6150 2    39   Input ~ 0
+START
+Connection ~ 4800 7050
+Connection ~ 4800 6850
+Wire Wire Line
+	4600 7350 4600 6150
+Wire Wire Line
+	4600 6150 4850 6150
+Connection ~ 4600 7350
+Wire Wire Line
+	4600 7350 5000 7350
+Wire Wire Line
+	4500 6050 4500 6750
+Connection ~ 4500 6050
+Wire Wire Line
+	4500 6050 4150 6050
+Connection ~ 4500 6750
+Wire Wire Line
+	4500 6750 5000 6750
+Wire Wire Line
+	4400 5950 4400 6850
+Connection ~ 4400 5950
+Connection ~ 4400 6850
+Wire Wire Line
+	4400 6850 4800 6850
+$Comp
+L Connector_Generic:Conn_01x04 J7
+U 1 1 611E27D1
+P 3650 6050
+F 0 "J7" H 3800 6050 50  0000 C CNN
+F 1 "Left Post" H 3950 5950 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 3650 6050 50  0001 C CNN
+F 3 "~" H 3650 6050 50  0001 C CNN
+	1    3650 6050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3850 6150 4600 6150
+Connection ~ 4600 6150
+Wire Wire Line
+	3850 6050 4150 6050
+Connection ~ 4150 6050
+Wire Wire Line
+	3850 5950 4400 5950
+Wire Wire Line
+	3850 5850 4300 5850
+Connection ~ 4300 5850
+$Comp
+L Connector_Generic:Conn_01x06 J8
+U 1 1 611F0BA2
+P 3650 4850
+F 0 "J8" H 3800 4800 50  0000 C CNN
+F 1 "Controller" H 3950 4700 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical" H 3650 4850 50  0001 C CNN
+F 3 "~" H 3650 4850 50  0001 C CNN
+	1    3650 4850
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3850 5050 4150 5050
+Connection ~ 4150 5050
+Wire Wire Line
+	3850 4950 4850 4950
+Wire Wire Line
+	3850 4850 4850 4850
+Wire Wire Line
+	3850 4750 4600 4750
+Connection ~ 4600 4750
+Wire Wire Line
+	3850 4650 4300 4650
+Connection ~ 4300 4650
+Wire Wire Line
+	3850 4550 4850 4550
+Wire Wire Line
+	3850 7350 4600 7350
+Wire Wire Line
+	3850 7250 5000 7250
+Wire Wire Line
+	3850 7150 5000 7150
+Wire Wire Line
+	3850 7050 4800 7050
+Wire Wire Line
+	3850 6950 4800 6950
+Wire Wire Line
+	3850 6850 4400 6850
+Wire Wire Line
+	3850 6750 4500 6750
+$Comp
+L onetouchlogo:LOGO G?
+U 1 1 6121352E
+P 2250 4700
+F 0 "G?" H 2250 4565 60  0001 C CNN
+F 1 "LOGO" H 2250 4835 60  0001 C CNN
+F 2 "OneTouch_Logo:onetouchlogo" H 2250 4700 50  0001 C CNN
+F 3 "" H 2250 4700 50  0001 C CNN
+	1    2250 4700
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

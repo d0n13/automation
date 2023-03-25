@@ -1,0 +1,14 @@
+{
+  "name": "mcp23009",
+  "version": "1.0.1",
+  "description": "Module to control the MCP23009 8-bit expander",
+  "main": "mcp23009.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Donie kelly ",
+  "license": "ISC",
+  "dependencies": {
+    "i2c-bus": "^5.2.2"
+  }
+}

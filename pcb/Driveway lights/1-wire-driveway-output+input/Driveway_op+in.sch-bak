@@ -1,0 +1,323 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 2
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector_Generic:Conn_01x04 J1
+U 1 1 605A1BA6
+P 2950 1250
+F 0 "J1" H 2950 1500 50  0000 C CNN
+F 1 "In" H 3100 1250 50  0000 C CNN
+F 2 "Connector_JST:JST_EH_S4B-EH_1x04_P2.50mm_Horizontal" H 2950 1250 50  0001 C CNN
+F 3 "~" H 2950 1250 50  0001 C CNN
+	1    2950 1250
+	-1   0    0    -1  
+$EndComp
+Text GLabel 4100 1250 2    50   Output ~ 0
+GPIO
+$Comp
+L power:GND #PWR01
+U 1 1 605B189C
+P 3300 1750
+F 0 "#PWR01" H 3300 1500 50  0001 C CNN
+F 1 "GND" H 3305 1577 50  0000 C CNN
+F 2 "" H 3300 1750 50  0001 C CNN
+F 3 "" H 3300 1750 50  0001 C CNN
+	1    3300 1750
+	1    0    0    -1  
+$EndComp
+Connection ~ 3300 1650
+$Comp
+L power:+12V #PWR0101
+U 1 1 605C4255
+P 3300 750
+F 0 "#PWR0101" H 3300 600 50  0001 C CNN
+F 1 "+12V" H 3315 923 50  0000 C CNN
+F 2 "" H 3300 750 50  0001 C CNN
+F 3 "" H 3300 750 50  0001 C CNN
+	1    3300 750 
+	1    0    0    -1  
+$EndComp
+$Comp
+L onetouchlogo:LOGO logo1
+U 1 1 605DAB09
+P 4750 1450
+F 0 "logo1" H 4800 1650 60  0000 C CNN
+F 1 "LOGO" H 4751 1677 60  0001 C CNN
+F 2 "logo:onetouchlogo" H 4750 1450 50  0001 C CNN
+F 3 "" H 4750 1450 50  0001 C CNN
+	1    4750 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP1
+U 1 1 605E4EB8
+P 3450 2400
+F 0 "TP1" V 3645 2472 50  0000 C CNN
+F 1 "TestPoint" V 3554 2472 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 3650 2400 50  0001 C CNN
+F 3 "~" H 3650 2400 50  0001 C CNN
+	1    3450 2400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 605E8701
+P 6150 3550
+F 0 "TP2" V 6345 3622 50  0000 C CNN
+F 1 "TestPoint" V 6254 3622 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 6350 3550 50  0001 C CNN
+F 3 "~" H 6350 3550 50  0001 C CNN
+	1    6150 3550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4200 2100 4100 2100
+Wire Wire Line
+	4200 2400 3950 2400
+Connection ~ 3950 1250
+Wire Wire Line
+	3750 2400 3950 2400
+Connection ~ 3950 2400
+Wire Wire Line
+	3950 2400 3950 1250
+Connection ~ 3750 2400
+$Comp
+L Device:R R2
+U 1 1 605BE695
+P 6150 3000
+F 0 "R2" H 6220 3046 50  0000 L CNN
+F 1 "10K" H 6220 2955 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 6080 3000 50  0001 C CNN
+F 3 "~" H 6150 3000 50  0001 C CNN
+	1    6150 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR03
+U 1 1 605BF12E
+P 6150 2650
+F 0 "#PWR03" H 6150 2500 50  0001 C CNN
+F 1 "+12V" H 6165 2823 50  0000 C CNN
+F 2 "" H 6150 2650 50  0001 C CNN
+F 3 "" H 6150 2650 50  0001 C CNN
+	1    6150 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 2850 6150 2750
+Wire Wire Line
+	6150 3150 6150 3250
+Wire Wire Line
+	6150 3350 6400 3350
+Connection ~ 6150 3350
+Wire Wire Line
+	6150 3550 6150 3350
+$Comp
+L Connector_Generic:Conn_01x02 J2
+U 1 1 605C53BB
+P 6950 2750
+F 0 "J2" H 7030 2742 50  0000 L CNN
+F 1 "LED" H 7030 2651 50  0000 L CNN
+F 2 "Connector_JST:JST_EH_S2B-EH_1x02_P2.50mm_Horizontal" H 6950 2750 50  0001 C CNN
+F 3 "~" H 6950 2750 50  0001 C CNN
+	1    6950 2750
+	1    0    0    -1  
+$EndComp
+Connection ~ 6150 2750
+Wire Wire Line
+	6150 2750 6150 2650
+$Comp
+L power:GND #PWR04
+U 1 1 605C8208
+P 6600 3600
+F 0 "#PWR04" H 6600 3350 50  0001 C CNN
+F 1 "GND" H 6605 3427 50  0000 C CNN
+F 2 "" H 6600 3600 50  0001 C CNN
+F 3 "" H 6600 3600 50  0001 C CNN
+	1    6600 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 3600 6600 3450
+$Comp
+L DS2413P_:DS2413P+ U1
+U 1 1 6058E10F
+P 4800 2300
+F 0 "U1" H 4800 2667 50  0000 C CNN
+F 1 "DS2413P+" H 4800 2576 50  0000 C CNN
+F 2 "DS2413P_:SOIC127P429X150-N" H 4800 2300 50  0001 L BNN
+F 3 "http://www.farnell.com/datasheets/1911564.pdf" H 4800 2300 50  0001 L BNN
+	1    4800 2300
+	-1   0    0    1   
+$EndComp
+$Comp
+L STD40NF10:STD40NF10 T2
+U 1 1 605D7DDE
+P 6500 3250
+F 0 "T2" H 6760 3296 50  0000 L CNN
+F 1 "STD40NF10" H 6760 3205 50  0000 L CNN
+F 2 "STD40NF10:D_PAK" H 6500 3250 50  0001 L BNN
+F 3 "https://ie.farnell.com/stmicroelectronics/std40nf03lt4/mosfet-n-ch-30v-40a-dpak/dp/1752039?ost=std40nf03l&iscrfnonsku=false" H 6500 3250 50  0001 L BNN
+	1    6500 3250
+	1    0    0    -1  
+$EndComp
+Connection ~ 6150 3250
+Wire Wire Line
+	6150 3250 6150 3350
+Wire Wire Line
+	5400 2300 5600 2300
+Wire Wire Line
+	5400 2400 5600 2400
+Wire Wire Line
+	5600 2400 5600 3250
+Wire Wire Line
+	5600 3250 6150 3250
+$Comp
+L power:GND #PWR06
+U 1 1 606D1CC7
+P 6100 1700
+F 0 "#PWR06" H 6100 1450 50  0001 C CNN
+F 1 "GND" H 6105 1527 50  0000 C CNN
+F 2 "" H 6100 1700 50  0001 C CNN
+F 3 "" H 6100 1700 50  0001 C CNN
+	1    6100 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 1550 6100 1550
+Wire Wire Line
+	6100 1550 6100 1700
+$Comp
+L power:+3.3V #PWR05
+U 1 1 606D30CD
+P 6100 1100
+F 0 "#PWR05" H 6100 950 50  0001 C CNN
+F 1 "+3.3V" H 6115 1273 50  0000 C CNN
+F 2 "" H 6100 1100 50  0001 C CNN
+F 3 "" H 6100 1100 50  0001 C CNN
+	1    6100 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 1350 6100 1350
+Wire Wire Line
+	6100 1350 6100 1100
+Wire Wire Line
+	5600 1450 6200 1450
+Wire Wire Line
+	5600 1450 5600 2300
+Wire Wire Line
+	4100 1650 3300 1650
+Wire Wire Line
+	3950 1250 4100 1250
+Wire Wire Line
+	3300 1650 3300 1750
+Wire Wire Line
+	3300 1450 3300 1650
+Wire Wire Line
+	3150 1250 3950 1250
+Wire Wire Line
+	3150 1150 3750 1150
+Wire Wire Line
+	3300 1450 3150 1450
+Wire Wire Line
+	3150 1350 3300 1350
+Wire Wire Line
+	3300 1350 3300 750 
+Wire Wire Line
+	4100 2100 4100 1650
+Wire Wire Line
+	3750 1150 3750 1750
+$Comp
+L power:+3.3V #PWR02
+U 1 1 605A950B
+P 3750 750
+F 0 "#PWR02" H 3750 600 50  0001 C CNN
+F 1 "+3.3V" H 3765 923 50  0000 C CNN
+F 2 "" H 3750 750 50  0001 C CNN
+F 3 "" H 3750 750 50  0001 C CNN
+	1    3750 750 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 750  3750 1150
+Connection ~ 3750 1150
+Wire Wire Line
+	3750 2050 3750 2400
+$Comp
+L Device:R R1
+U 1 1 605A70D2
+P 3750 1900
+F 0 "R1" H 3820 1946 50  0000 L CNN
+F 1 "1K" H 3820 1855 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric" V 3680 1900 50  0001 C CNN
+F 3 "~" H 3750 1900 50  0001 C CNN
+	1    3750 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J3
+U 1 1 6078A58B
+P 6400 1450
+F 0 "J3" H 6480 1442 50  0000 L CNN
+F 1 "LED" H 6480 1351 50  0000 L CNN
+F 2 "Connector_JST:JST_XH_S3B-XH-A-1_1x03_P2.50mm_Horizontal" H 6400 1450 50  0001 C CNN
+F 3 "~" H 6400 1450 50  0001 C CNN
+	1    6400 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP3
+U 1 1 6078D9E8
+P 5600 1450
+F 0 "TP3" V 5795 1522 50  0000 C CNN
+F 1 "TestPoint" V 5704 1522 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Pad_1.0x1.0mm" H 5800 1450 50  0001 C CNN
+F 3 "~" H 5800 1450 50  0001 C CNN
+	1    5600 1450
+	0    -1   -1   0   
+$EndComp
+Connection ~ 5600 1450
+Wire Wire Line
+	6150 2750 6750 2750
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 6079B8B1
+P 4450 2800
+F 0 "H1" H 4550 2846 50  0000 L CNN
+F 1 "MountingHole" H 4550 2755 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.1mm" H 4450 2800 50  0001 C CNN
+F 3 "~" H 4450 2800 50  0001 C CNN
+	1    4450 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 6079BD8F
+P 4450 3000
+F 0 "H2" H 4550 3046 50  0000 L CNN
+F 1 "MountingHole" H 4550 2955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.1mm" H 4450 3000 50  0001 C CNN
+F 3 "~" H 4450 3000 50  0001 C CNN
+	1    4450 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 2400 3750 2400
+Wire Wire Line
+	6600 2850 6600 3050
+Wire Wire Line
+	6600 2850 6750 2850
+$EndSCHEMATC

@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "DS2413P_")(type "KiCad")(uri "/Users/donie/Documents/raspberrypi-automation/pcb/components/DS2413P_")(options "")(descr ""))
+)
