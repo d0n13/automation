@@ -22,10 +22,10 @@ http://rpi-sidelights.local:8581
 Add this accessory to the homebridge.config. Note pin 17 is BCM pinout. Actually physical pin 11
 ```
 {
-    "accessory": "GPIODevice",
-    "name": "West Side Lights",
-    "type": "Lightbulb",
-    "pin": 17
+	"accessory": "GPIODevice",
+	"name": "West Side Lights",
+	"type": "Lightbulb",
+	"pin": 17
 } 
 ```
 # SD Card
