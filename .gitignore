@@ -20,9 +20,10 @@ garagedoor-rescue.lib
 sym-lib-table
 gerber
 SDimage/
-**/Gate\ Controller-backups/*
 \#auto_saved_files\#  
 _autosave*
 node_modules/
 dist/
-
+**backups/
+~*
+**/Gate Controller.kicad_pcb-bak

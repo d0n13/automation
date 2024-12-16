@@ -1,15 +1,12 @@
-(kicad_sch (version 20211123) (generator eeschema)
-
-  (uuid c9667181-b3c7-4b01-b8b4-baa29a9aea63)
-
-  (paper "A4")
-
-  (title_block
-    (rev "2022.1.2")
-    (company "Donie Kelly")
-  )
-
-  (lib_symbols
-  )
-
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "c9667181-b3c7-4b01-b8b4-baa29a9aea63")
+	(paper "A4")
+	(title_block
+		(rev "2024.1.0")
+		(company "Donie Kelly")
+	)
+	(lib_symbols)
 )

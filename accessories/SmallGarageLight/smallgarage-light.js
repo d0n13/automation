@@ -11,7 +11,7 @@ module.exports = function(homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
 
-    homebridge.registerAccessory("homebridge-led", "PiLight", LedAccessory);
+    homebridge.registerAccessory("homebridge-led", "SmallGarageLight", LedAccessory);
 }
 
 function LedAccessory(log, config) {

@@ -3,7 +3,7 @@ Small garage door to side of main garage. Runs on `rpi-grgsmall.local`
 
 # Clone repo
 ```bash
-git clone git@bitbucket.org:donie/raspberrypi-automation.git
+git clone git clone https://github.com/d0n13/automation.git
 ```
 
 # Install prerequisites for homebridge
