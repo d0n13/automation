@@ -576,7 +576,7 @@
       "plot": "gerber/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Gate Controller.step",
       "svg": "",
       "vrml": ""
     },

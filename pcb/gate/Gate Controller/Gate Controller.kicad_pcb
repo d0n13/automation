@@ -3415,7 +3415,7 @@
 			)
 		)
 		(property "Value" "RJ45_Shielded"
-			(at 3.56 9.5 360)
+			(at 3.56 9.5 0)
 			(layer "F.Fab")
 			(uuid "d2f3e255-d155-4277-8162-313e2803f6bc")
 			(effects
@@ -3650,7 +3650,7 @@
 			(uuid "c5f9597d-6b28-4e80-bf36-b9178d3b25e8")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3.56 -6 360)
+			(at 3.56 -6 0)
 			(layer "F.Fab")
 			(uuid "aacfec40-b0c6-4e9e-aa1e-90e90d26ebf1")
 			(effects
@@ -5256,7 +5256,7 @@
 			)
 		)
 		(property "Value" "RJ45_Shielded"
-			(at 3.56 9.5 360)
+			(at 3.56 9.5 0)
 			(layer "F.Fab")
 			(uuid "eb98220b-2789-4729-a2c0-9f208ba156f5")
 			(effects
@@ -5491,7 +5491,7 @@
 			(uuid "87ba9d61-7a16-4f5c-9586-7856f7ef3a33")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3.56 -6 360)
+			(at 3.56 -6 0)
 			(layer "F.Fab")
 			(uuid "2a1e7631-4f57-4105-97ad-ac1df68f3833")
 			(effects
@@ -7678,7 +7678,7 @@
 				)
 			)
 		)
-		(property "Value" "START"
+		(property "Value" "SW_Push"
 			(at 0 6 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9701,7 +9701,7 @@
 		(uuid "a113b7d0-8fac-48f3-ac3f-39c93f76135d")
 		(at 76.25 194.75)
 		(property "Reference" "G1"
-			(at 1.27 -3.81 360)
+			(at 1.27 -3.81 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "21edb85b-f2e9-4735-81b0-bc57f5c2a981")
@@ -9713,7 +9713,7 @@
 			)
 		)
 		(property "Value" "LOGO"
-			(at 0 3.81 360)
+			(at 0 3.81 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "bde1a0a4-7529-4bb5-9f20-d96aad1b93fc")
@@ -9725,7 +9725,7 @@
 			)
 		)
 		(property "Footprint" "OneTouch_Logo:onetouchlogo"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5c0e5f80-9f48-4eb3-aa4e-db8f5fc9a0a9")
@@ -9737,7 +9737,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5b491ffd-3883-4412-96d5-4acac6e71c26")
@@ -9749,7 +9749,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "23c7992d-1bad-4b9f-9cef-5b113e65e1a8")
