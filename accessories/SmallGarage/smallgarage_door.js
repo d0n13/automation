@@ -66,16 +66,21 @@ SmallGarageAccessory.prototype.setTargetDoorState = function(targetState, callba
         rpio.msleep(500);
         rpio.write(PIN.Open, rpio.LOW);
         
-        currentDoorState = 2;
-        Characteristic.CurrentDoorState = currentDoorState;
+        currentDoorState = Characteristic.CurrentDoorState.OPENING;
+ 	this.service
+            .getCharacteristic(Characteristic.CurrentDoorState)
+            .updateValue(currentDoorState);       
         
-        setTimeout(function() {
-                   console.log("Open");
+        setTimeout(() => {
+            console.log("Open");
                    
-                   currentDoorState = 0; // Open
-                   Characteristic.CurrentDoorState = currentDoorState;
+            currentDoorState = Characteristic.CurrentDoorState.OPEN;
+            this.service
+            	.getCharacteristic(Characteristic.CurrentDoorState)
+                .updateValue(currentDoorState);
+	    callback(null);
                    
-                   }, 8000);
+        }, 3000);
     }
     else if(targetState == Characteristic.TargetDoorState.CLOSED) {
         
@@ -85,23 +90,27 @@ SmallGarageAccessory.prototype.setTargetDoorState = function(targetState, callba
         rpio.msleep(500);
         rpio.write(PIN.Close, rpio.LOW);
         
-        currentDoorState = 3;
-        Characteristic.CurrentDoorState = currentDoorState; // Closing
+        currentDoorState = Characteristic.CurrentDoorState.CLOSING;
+	this.service
+	    .getCharacteristic(Characteristic.CurrentDoorState)
+            .updateValue(currentDoorState);
         
-        setTimeout(function() {
-                   console.log("Closed");
+        setTimeout(() =>  {
+            console.log("Closed");
                    
-                   currentDoorState = 1; // Closed
-                   Characteristic.CurrentDoorState = currentDoorState;
+            currentDoorState = Characteristic.CurrentDoorState.CLOSED;
+	    this.service
+                .getCharacteristic(Characteristic.CurrentDoorState)
+		.updateValue(currentDoorState);
+ 	    callback(null);
                    
-                   }, 8000);
+        }, 3000);
     }
-    callback(null, targetState); // OPEN=0, CLOSED=1
 }
 
 SmallGarageAccessory.prototype.getObstructionDetected = function(callback) {
     
-   callback(null, Characteristic.ObstructionDetected.NO); // 0=NO, 1=YES
+   callback(null, false); // 0=NO, 1=YES
 }
 
 SmallGarageAccessory.prototype.getServices = function() {
