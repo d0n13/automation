@@ -7,12 +7,14 @@ const GPIO_AUX_LIGHT = 29;
 const MCP23009_ADDR = 0x27;
 const START = 0x07;
 const PEDS = 0x06;
-const STOP = 0x05;
-const SLEEP_TIME = 200000;
+const HOLD = 0x05;
+const OPEN = 0x01;
+const CLOSE = 0x02;
+const SLEEP_TIME = 200000; // microseconds
 
 export class GateController {
 
-  private readonly name ='Gate MCP';
+  private readonly name ='Gate Controller';
   private readonly log: Logging;
   private readonly mcp: mcp23009;
 
@@ -33,7 +35,7 @@ export class GateController {
     this.mcp.configPolarityRegister(0b00000011);
 
     this.mcp.pinWrite(START, this.mcp.LOW);
-    this.mcp.pinWrite(STOP, this.mcp.LOW);
+    this.mcp.pinWrite(HOLD, this.mcp.LOW);
     this.mcp.pinWrite(PEDS, this.mcp.LOW);
 
     this.log.info(this.name + ': SEA controller initialised');
@@ -47,20 +49,20 @@ export class GateController {
     this.mcp.pinWrite(START, this.mcp.LOW);
   }
 
-  stop(): void {
+  hold(onoff: boolean): void {
 
-    this.log.debug(this.name + ': Stopping');
-    this.mcp.pinWrite(STOP, this.mcp.HIGH);
-    rpio.usleep(SLEEP_TIME);
-    this.mcp.pinWrite(STOP, this.mcp.LOW);
+    const action = onoff? this.mcp.HIGH : this.mcp.LOW;
+    const actionText = onoff? 'Holding': 'Releasing';
+    this.log.debug(this.name + ' ' + actionText);
+    this.mcp.pinWrite(HOLD, action);
   }
 
-  pedestrian(): void {
+  pedestrian(onoff: boolean): void {
 
-    this.log.debug(this.name + ': Pedestrian opening');
-    this.mcp.pinWrite(PEDS, this.mcp.HIGH);
-    rpio.usleep(SLEEP_TIME);
-    this.mcp.pinWrite(PEDS, this.mcp.LOW);
+    const action = onoff? this.mcp.HIGH : this.mcp.LOW;
+    const actionText = onoff? 'Pedestrian Hold': 'Releasing Pedestrian Hold';
+    this.log.debug(this.name + ' ' + actionText);
+    this.mcp.pinWrite(PEDS, action);
   }
 
   gatePostLights(onoff: boolean): void {
@@ -71,5 +73,21 @@ export class GateController {
   auxiliaryLights(onoff: boolean): void {
 
     rpio.write(GPIO_AUX_LIGHT, onoff ? rpio.HIGH : rpio.LOW);
+  }
+
+  isOpen(): boolean {
+    // const state = this.mcp.pinRead(OPEN);
+    // const stateText = state ? 'gate open' : 'position unknown';
+    // this.log.debug(this.name + ' detected ' + stateText);
+    // return state;
+    return true;
+  }
+
+  isClosed(): boolean {
+    // const state = this.mcp.pinRead(CLOSE);
+    // const stateText = state ? 'gate closed' : 'position unknown';
+    // this.log.debug(this.name + ' detected ' + stateText);
+    // return state;
+    return true;
   }
 }

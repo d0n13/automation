@@ -60,7 +60,16 @@ export class GateOpenerAccessory implements AccessoryPlugin {
     // static readonly CLOSING = 3;
     // static readonly STOPPED = 4;
 
-    this.log.info(this.name + ' status: ' + this.gateState);
+    // Handle reading the gate controller to determine the current state
+    if (this.hap.Characteristic.TargetDoorState.CLOSED) {
+
+      this.gate.isClosed() ? this.gateState = this.hap.Characteristic.CurrentDoorState.CLOSED :
+        this.gateState = this.hap.Characteristic.CurrentDoorState.CLOSING;
+    } else {
+
+      this.gate.isOpen() ? this.gateState = this.hap.Characteristic.CurrentDoorState.OPEN :
+        this.gateState = this.hap.Characteristic.CurrentDoorState.OPENING;
+    }
 
     return this.gateState;
   }
@@ -68,8 +77,8 @@ export class GateOpenerAccessory implements AccessoryPlugin {
   handleTargetDoorStateGet() {
     // static readonly OPEN = 0;
     // static readonly CLOSED = 1;
-
-    this.log.info(this.name + ' target state: ' + this.targetGateState);
+    const gateState = this.targetGateState ? 'CLOSED' : 'OPEN';
+    this.log.info(this.name + ' target state: ' + gateState);
     return this.targetGateState ;
   }
 
@@ -102,6 +111,125 @@ export class GateOpenerAccessory implements AccessoryPlugin {
     return [
       this.informationService,
       this.gateService,
+    ];
+  }
+}
+
+export class GateHoldAccessory implements AccessoryPlugin {
+
+  private readonly log: Logging;
+  private switchOn = false;
+  private name: string;
+
+  private readonly switchService: Service;
+  private readonly informationService: Service;
+  private readonly gate: GateController;
+
+  constructor(hap: HAP, log: Logging, name: string) {
+
+    this.log = log;
+    this.name = name;
+    this.gate = new GateController(log);
+
+    this.switchService = new hap.Service.Lightbulb(name);
+
+    this.switchService.getCharacteristic(hap.Characteristic.On)
+      .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
+
+        log.info(name + ' ' + (this.switchOn? 'ON': 'OFF'));
+        callback(undefined, this.switchOn);
+      })
+      .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
+
+        try {
+
+          this.switchOn = !this.switchOn;
+          this.gate.hold(this.switchOn ? true : false);
+
+        } catch (error) {
+
+          log.info('rpio failed: ' + error);
+        }
+
+        callback();
+      });
+
+    this.informationService = new hap.Service.AccessoryInformation()
+      .setCharacteristic(hap.Characteristic.Manufacturer, 'One Touch 2022')
+      .setCharacteristic(hap.Characteristic.SerialNumber, '4f909710-8785-11ec-a437-473ed6a28ef8')
+      .setCharacteristic(hap.Characteristic.FirmwareRevision, '2022.1.2')
+      .setCharacteristic(hap.Characteristic.Model, name);
+
+    log.info('\'%s\' switch created!', name);
+  }
+
+  /*
+       * This method is called directly after creation of this instance.
+       * It should return all services which should be added to the accessory.
+       */
+  getServices(): Service[] {
+    return [
+      this.informationService,
+      this.switchService,
+    ];
+  }
+}
+
+export class GatePedestrianAccessory implements AccessoryPlugin {
+
+  private readonly log: Logging;
+  private switchOn = false;
+  private name: string;
+
+  private readonly switchService: Service;
+  private readonly informationService: Service;
+  private readonly gate: GateController;
+
+  constructor(hap: HAP, log: Logging, name: string) {
+
+    this.log = log;
+    this.name = name;
+    this.gate = new GateController(log);
+
+    this.switchService = new hap.Service.Lightbulb(name);
+
+    this.switchService.getCharacteristic(hap.Characteristic.On)
+      .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
+
+        log.info(name + ' ' + (this.switchOn? 'ON': 'OFF'));
+        callback(undefined, this.switchOn);
+      })
+      .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
+
+        try {
+          this.switchOn = !this.switchOn;
+          this.gate.pedestrian(this.switchOn ? true : false);
+
+        } catch (error) {
+
+          log.info('rpio failed: ' + error);
+        }
+
+        callback();
+      });
+
+    this.informationService = new hap.Service.AccessoryInformation()
+      .setCharacteristic(hap.Characteristic.Manufacturer, 'One Touch 2022')
+      .setCharacteristic(hap.Characteristic.SerialNumber, '4f909710-8785-11ec-a437-473ed6a28ef8')
+      .setCharacteristic(hap.Characteristic.FirmwareRevision, '2022.1.2')
+      .setCharacteristic(hap.Characteristic.Model, name);
+
+    log.info('\'%s\' switch created!', name);
+  }
+
+  /*
+       * This method is called directly after creation of this instance.
+       * It should return all services which should be added to the accessory.
+       */
+  getServices(): Service[] {
+    return [
+      this.informationService,
+      this.switchService,
     ];
   }
 }
