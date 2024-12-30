@@ -1,12 +1,7 @@
-import { API, HAP, StaticPlatformPlugin, Logging, AccessoryPlugin, PlatformConfig, Service, Characteristic } from 'homebridge';
-
-// import { SEAGatePlatformControlAccessory } from './platformAccessory';
-// import { SEAGatePlatformLightAccessory } from './platformLightsAccessory';
-// import { SEAGatePlatform1wireLightAccessory } from './platform1WireLightsAccessory';
-import { GateLightAccessory } from './GateLightAccessory';
+import { API, HAP, StaticPlatformPlugin, Logging, AccessoryPlugin, PlatformConfig } from 'homebridge';
 import { DrivewayLightsAccessory } from './DrivewayLightsAccessory';
 import { AUXLightAccessory } from './AUXLightsAccessory';
-import { GateOpenerAccessory, GatePedestrianAccessory, GateHoldAccessory} from './GateOpenerAccessory';
+import { GateOpenerAccessory, GateLightAccessory, GatePedestrianAccessory, GateHoldAccessory} from './GateOpenerAccessory';
 
 /**
  * HomebridgePlatform

@@ -12,6 +12,11 @@ export class DrivewayController {
   constructor(log: Logging) {
     this.log = log;
 
-    this.log('driveway lights controller initialised');
+    this.log.info('Driveway 1-wire lights controller initialised');
+  }
+
+  drivewayLights(on: boolean): void {
+
+    this.log.info('Driveway lights: N/A (' + (on ? 'ON' : 'OFF') + ')');
   }
 }

@@ -84,6 +84,19 @@ var MCP23009 = (function () {
   }
 
   /**
+   * Write to a PIN
+   * 
+   * @pin  The PIN to write to from 0 to 7
+   * @value Boolean HIGH or LOW
+   */
+  MCP23009.prototype.pinRead = function (pin) {
+
+    // Read the current GPIO state
+    var gpio_state = this.registerRead(GPIO);
+    return (gpio_state & (1 << pin)) !== 0;
+  }
+
+  /**
    * Read from any of the registers; namely, 
    * IODIR = 0x00
    * IPOL = 0x01

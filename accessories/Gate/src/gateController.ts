@@ -10,7 +10,7 @@ const PEDS = 0x06;
 const HOLD = 0x05;
 const OPEN = 0x01;
 const CLOSE = 0x02;
-const SLEEP_TIME = 200000; // microseconds
+const SLEEP_TIME = 500000; // microseconds
 
 export class GateController {
 
@@ -30,12 +30,12 @@ export class GateController {
     rpio.open(GPIO_GATE_LIGHTS, rpio.OUTPUT, rpio.LOW);
     rpio.open(GPIO_AUX_LIGHT, rpio.OUTPUT, rpio.LOW);
 
-    this.log.debug(this.name + ': Configuring MCP23009 IO directions');
+    this.log.info(this.name + ': Configuring MCP23009 IO directions');
     this.mcp.configDirectionRegister(0b00000011);
     this.mcp.configPolarityRegister(0b00000011);
 
     this.mcp.pinWrite(START, this.mcp.LOW);
-    this.mcp.pinWrite(HOLD, this.mcp.LOW);
+    this.mcp.pinWrite(HOLD, this.mcp.HIGH);   // Hold is active low
     this.mcp.pinWrite(PEDS, this.mcp.LOW);
 
     this.log.info(this.name + ': SEA controller initialised');
@@ -43,7 +43,7 @@ export class GateController {
 
   start(): void {
 
-    this.log.debug(this.name + ': Opening');
+    this.log.info(this.name + ': Start Pulse');
     this.mcp.pinWrite(START, this.mcp.HIGH);
     rpio.usleep(SLEEP_TIME);
     this.mcp.pinWrite(START, this.mcp.LOW);
@@ -51,28 +51,33 @@ export class GateController {
 
   hold(onoff: boolean): void {
 
-    const action = onoff? this.mcp.HIGH : this.mcp.LOW;
-    const actionText = onoff? 'Holding': 'Releasing';
-    this.log.debug(this.name + ' ' + actionText);
+    // Logic is reversed as STOP state is active LOW - ie: STOP on CN1 is normally tied to ground
+    const action = onoff? this.mcp.LOW : this.mcp.HIGH;
+    const actionText = onoff? 'Holding': 'Normal';
+    this.log.info(this.name + ' ' + actionText);
     this.mcp.pinWrite(HOLD, action);
   }
 
-  pedestrian(onoff: boolean): void {
+  pedestrian(): void {
 
-    const action = onoff? this.mcp.HIGH : this.mcp.LOW;
-    const actionText = onoff? 'Pedestrian Hold': 'Releasing Pedestrian Hold';
-    this.log.debug(this.name + ' ' + actionText);
-    this.mcp.pinWrite(PEDS, action);
+    this.log.info(this.name + ' Pedertrian');
+    this.mcp.pinWrite(PEDS, this.mcp.HIGH);
+    rpio.usleep(SLEEP_TIME);
+    this.mcp.pinWrite(PEDS, this.mcp.LOW);
   }
 
   gatePostLights(onoff: boolean): void {
 
     rpio.write(GPIO_GATE_LIGHTS, onoff ? rpio.HIGH : rpio.LOW);
+    const actionText = onoff ? 'Post Lights ON' : 'Post Lights OFF';
+    this.log.info(this.name + ' ' + actionText);
   }
 
   auxiliaryLights(onoff: boolean): void {
 
     rpio.write(GPIO_AUX_LIGHT, onoff ? rpio.HIGH : rpio.LOW);
+    const actionText = onoff ? 'Auxilary Lights ON' : 'Auxilary Lights OFF';
+    this.log.info(this.name + ' ' + actionText);
   }
 
   isOpen(): boolean {
