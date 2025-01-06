@@ -54,5 +54,10 @@ Link the dev folder to the homebride node_modules. The plugin should now be avai
 ```
 sudo ln -s /home/homebridge/automation/accessories/Gate /var/lib/homebridge/node_modules/homebridge-sea-entrance-gate
 ```
-Restart the UI and the plugin should be available in the UI. Restart the Child bridge to pick up changes in code
+Restart the UI and the plugin should be available in the UI
+
+Make changes and run the build to update the plugin. Restart the Child bridge to pick up changes in code
+```
+npm run build
+```
 
