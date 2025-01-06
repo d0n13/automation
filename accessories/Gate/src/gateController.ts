@@ -1,6 +1,7 @@
 import {Logging} from 'homebridge';
 import mcp23009 from 'mcp23009';
 import rpio from 'rpio';
+import { runInThisContext } from 'vm';
 
 const GPIO_GATE_LIGHTS = 11;
 const GPIO_AUX_LIGHT = 29;
@@ -58,6 +59,15 @@ export class GateController {
     const actionText = onoff? 'Holding': 'Normal';
     this.log.info(this.name + ' ' + actionText);
     this.mcp.pinWrite(HOLD, action);
+
+    // Start the gate when hold is released but only if open
+    setTimeout(() => {
+      if (onoff === false) {
+        if (!this.isClosed()) {
+          this.start();
+        }
+      }
+    }, 1000);
   }
 
   pedestrian(): void {

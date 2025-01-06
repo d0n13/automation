@@ -24,7 +24,6 @@ export class GateOpenerAccessory implements AccessoryPlugin {
 
   private currentState;
   private targetState;
-  private isPolling = true; // Initally set to true so we can check the gate state
 
   constructor(hap: HAP, log: Logging, name: string) {
 
@@ -33,7 +32,7 @@ export class GateOpenerAccessory implements AccessoryPlugin {
     this.name = name;
     this.gate = new GateController(log);
     this.gateService = new hap.Service.GarageDoorOpener(name);
-    this.currentState = hap.Characteristic.CurrentDoorState.STOPPED;
+    this.currentState = hap.Characteristic.CurrentDoorState.CLOSED;
     this.targetState = hap.Characteristic.TargetDoorState.CLOSED;
 
     this.monitorValue();
@@ -60,34 +59,36 @@ export class GateOpenerAccessory implements AccessoryPlugin {
 
     setInterval(() => {
 
-      if (this.isPolling) {
-
-        this.log.debug('Checking if gate open or closed');
-
-        const open = this.gate.isOpen();
-        const closed = this.gate.isClosed();
-
-        if (open) {
-          this.log.debug('Gate is open');
-          this.currentState = this.hap.Characteristic.CurrentDoorState.OPEN;
-        }
-
-        if (closed) {
-          this.log.debug('Gate is closed');
-          this.currentState = this.hap.Characteristic.CurrentDoorState.CLOSED;
-        }
-
-        if (open || closed) {
-
-          this.isPolling = false; // Stop checking limit switches
-          this.gateService
-            .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
-            .updateValue(this.currentState);
-
-          this.getCurrentGateState(); // Update the current state
-        }
+      enum GateState {
+        OPEN = 1,
+        CLOSED = 2,
+        UNKNOWN
       }
-    }, 500); // Check every 500ms
+
+      let state = this.gate.isOpen() ? GateState.OPEN : GateState.UNKNOWN;
+      if (state === GateState.UNKNOWN) {
+        state = this.gate.isClosed() ? GateState.CLOSED : GateState.UNKNOWN;
+      }
+
+      // Only log if the state has changed
+      if (state === GateState.OPEN) {
+        this.log.debug('Gate is open');
+        this.currentState = this.hap.Characteristic.CurrentDoorState.OPEN;
+      }
+
+      if (state === GateState.CLOSED) {
+        this.log.debug('Gate is closed');
+        this.currentState = this.hap.Characteristic.CurrentDoorState.CLOSED;
+      }
+
+      if (state !== GateState.UNKNOWN) {
+        this.gateService
+          .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
+          .updateValue(this.currentState);
+
+        this.getCurrentGateState(); // Update the current state
+      }
+    }, 1000); // Check every second
   }
 
   getCurrentGateState() {
@@ -123,24 +124,9 @@ export class GateOpenerAccessory implements AccessoryPlugin {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setTargetGateState() {
 
-    // static readonly OPEN = 0;
-    // static readonly CLOSED = 1;
-    // static readonly OPENING = 2;
-    // static readonly CLOSING = 3;
-    // static readonly STOPPED = 4;
-
-    // this.targetState = targetState;
-    // this.log.error(`${targetState}`);
-
-    // Start checking if the gate is open or closed after we start to move the gate
-    setTimeout(() => {
-      this.isPolling = true;
-    }, 4000); // Wait 4 seconds
-
     if (this.currentState === this.hap.Characteristic.CurrentDoorState.CLOSED) {
 
       this.log.info('Gate is Opening');
-      // this.targetState = targetState;
       this.currentState = this.hap.Characteristic.CurrentDoorState.OPENING;
       this.gate.start();
 
@@ -227,63 +213,63 @@ export class GateHoldAccessory implements AccessoryPlugin {
   }
 }
 
-export class GatePedestrianAccessory implements AccessoryPlugin {
+// export class GatePedestrianAccessory implements AccessoryPlugin {
 
-  private readonly log: Logging;
-  private pedestrianOn = false;
-  private name: string;
+//   private readonly log: Logging;
+//   private pedestrianOn = false;
+//   private name: string;
 
-  private readonly switchService: Service;
-  private readonly informationService: Service;
-  private readonly gate: GateController;
+//   private readonly switchService: Service;
+//   private readonly informationService: Service;
+//   private readonly gate: GateController;
 
-  constructor(hap: HAP, log: Logging, name: string) {
+//   constructor(hap: HAP, log: Logging, name: string) {
 
-    this.log = log;
-    this.name = name;
-    this.gate = new GateController(log);
+//     this.log = log;
+//     this.name = name;
+//     this.gate = new GateController(log);
 
-    this.switchService = new hap.Service.Switch(name);
+//     this.switchService = new hap.Service.Switch(name);
 
-    this.switchService.getCharacteristic(hap.Characteristic.On)
-      .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
+//     this.switchService.getCharacteristic(hap.Characteristic.On)
+//       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
 
-        callback(undefined, this.pedestrianOn);
-      })
-      .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
+//         callback(undefined, this.pedestrianOn);
+//       })
+//       .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
 
-        try {
-          this.pedestrianOn = true;
-          this.gate.pedestrian();
+//         try {
+//           this.pedestrianOn = true;
+//           this.gate.pedestrian();
 
-          setTimeout(() => {
-            this.pedestrianOn = false;
-            this.switchService.getCharacteristic(hap.Characteristic.On)
-              .updateValue(this.pedestrianOn);
-          }, 6000);
+//           setTimeout(() => {
+//             this.pedestrianOn = false;
+//             this.switchService.getCharacteristic(hap.Characteristic.On)
+//               .updateValue(this.pedestrianOn);
+//           }, 6000);
 
-        } catch (error) {
+//         } catch (error) {
 
-          log.error('rpio failed: ' + error);
-        }
+//           log.error('rpio failed: ' + error);
+//         }
 
-        callback();
-      });
+//         callback();
+//       });
 
-    this.informationService = new hap.Service.AccessoryInformation()
-      .setCharacteristic(hap.Characteristic.Manufacturer, manafacturer)
-      .setCharacteristic(hap.Characteristic.SerialNumber, '4f909710-8785-11ec-a437-473ed6a28ef8')
-      .setCharacteristic(hap.Characteristic.FirmwareRevision, version)
-      .setCharacteristic(hap.Characteristic.Model, name);
-  }
+//     this.informationService = new hap.Service.AccessoryInformation()
+//       .setCharacteristic(hap.Characteristic.Manufacturer, manafacturer)
+//       .setCharacteristic(hap.Characteristic.SerialNumber, '4f909710-8785-11ec-a437-473ed6a28ef8')
+//       .setCharacteristic(hap.Characteristic.FirmwareRevision, version)
+//       .setCharacteristic(hap.Characteristic.Model, name);
+//   }
 
-  getServices(): Service[] {
-    return [
-      this.informationService,
-      this.switchService,
-    ];
-  }
-}
+//   getServices(): Service[] {
+//     return [
+//       this.informationService,
+//       this.switchService,
+//     ];
+//   }
+// }
 
 export class GateLightAccessory implements AccessoryPlugin {
 

@@ -1,7 +1,7 @@
 import { API, HAP, StaticPlatformPlugin, Logging, AccessoryPlugin, PlatformConfig } from 'homebridge';
 import { DrivewayLightsAccessory } from './DrivewayLightsAccessory';
 import { AUXLightAccessory } from './AUXLightsAccessory';
-import { GateOpenerAccessory, GateLightAccessory, GatePedestrianAccessory, GateHoldAccessory} from './GateOpenerAccessory';
+import { GateOpenerAccessory, GateLightAccessory, GateHoldAccessory} from './GateOpenerAccessory';
 
 /**
  * HomebridgePlatform
@@ -42,7 +42,7 @@ export class SEAGateHomebridgePlatform implements StaticPlatformPlugin {
       new AUXLightAccessory(this.hap, this.log, 'Auxiliary Lights'),
       new GateOpenerAccessory(this.hap, this.log, 'Gate'),
       new GateHoldAccessory(this.hap, this.log, 'Gate Hold' ),
-      new GatePedestrianAccessory(this.hap, this.log, 'Pedestrian Hold'),
+      // new GatePedestrianAccessory(this.hap, this.log, 'Pedestrian Hold'),
     ]);
   }
 }

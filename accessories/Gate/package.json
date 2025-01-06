@@ -1,17 +1,14 @@
 {
-  "private": true,
+  "private": false,
   "displayName": "SEA Gate",
   "name": "homebridge-sea-entrance-gate",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Manages a SEA sliding gate with custom electronics",
   "license": "Apache-2.0",
   "author": "d0n13",
   "repository": {
     "type": "git",
-    "url": "https://github.com/d0n13/EntranceGate"
-  },
-  "bugs": {
-    "url": "https://github.com/d0n13/EntranceGate/issues"
+    "url": "https://github.com/d0n13/automation/tree/master/accessories/Gate"
   },
   "engines": {
     "node": ">=14.18.1",
@@ -28,7 +25,7 @@
     "homebridge-plugin"
   ],
   "dependencies": {
-    "mcp23009": "^1.0.2",
+    "mcp23009": "^1.0.6",
     "rpio": "^2.4.2"
   },
   "devDependencies": {
