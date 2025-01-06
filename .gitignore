@@ -28,3 +28,4 @@ dist/
 **backups/
 ~*
 **/Gate Controller.kicad_pcb-bak
+**/package-lock.json

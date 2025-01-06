@@ -1,6 +1,10 @@
 {
   "name": "mcp23009",
+<<<<<<< HEAD
   "version": "1.0.6",
+=======
+  "version": "1.0.3",
+>>>>>>> a03b3a50a0604501d96251c1aede06f659034f46
   "description": "Module to control the MCP23009 8-bit expander",
   "main": "mcp23009.js",
   "scripts": {
