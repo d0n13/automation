@@ -4,7 +4,7 @@
 
 var i2c = require('i2c-bus');
 
-// List of mcp23009 registers
+//  // List of mcp23009 registers
 var
   IODIR = 0x00,
   IPOL = 0x01,
@@ -16,16 +16,15 @@ var
   INTF = 0x07,
   INTCAP = 0x08,
   GPIO = 0x09,
-  OLAT = 0x0A;
-
+  OLAT = 0x0A,
+  HIGH = 1,
+  LOW = 0;
+    
 // Used to zero pad binary represenations in logs
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 
 var MCP23009 = (function () {
-
-  MCP23009.prototype.HIGH = 1;
-  MCP23009.prototype.LOW = 0;
-
+  
   /**
    * Init wit a config
    * 
@@ -43,22 +42,14 @@ var MCP23009 = (function () {
    * 
    * @value Bitmask to signify input or outout
    */
-  MCP23009.prototype.configDirectionRegister = function (value) {
+  // MCP23009.prototype.configDirectionRegister = function (value) {
 
-    this.registerWrite(IODIR, value);
-  }
+  //   this.registerWrite(IODIR, value);
+  // }
 
-  /**
-   * Setup whether polarity is reversed or not. 
-   * This register allows the user to configure the polarity on the corresponding GPIO port bits.
-   * If a bit is set, the corresponding GPIO register bit will reflect the inverted value on the pin.
-   * Value is passed as a byte ie: 0x03 or 0b00000011
-   * 
-   * @value Bitmask signifying whetehr to reverse polarity (1) or not (0)
-   */
-  MCP23009.prototype.configPolarityRegister = function (value) {
+  MCP23009.prototype.configRegister = function(register, value) {
 
-    this.registerWrite(IPOL, value);
+    this.registerWrite(register, value);
   }
 
   /**
@@ -67,36 +58,58 @@ var MCP23009 = (function () {
    * @pin  The PIN to write to from 0 to 7
    * @value Boolean HIGH or LOW
    */
-  MCP23009.prototype.pinWrite = function (pin, value) {
+  MCP23009.prototype.pinWrite = function(bitPosition, bitValue) {
+
+    if (bitPosition < 0 || bitPosition > 7) {
+      throw new Error("Position must be between 0 and 7");
+    }
+
+    // Read the current byte value from the MCP output register
+    let byteValue = this.registerRead(GPIO); 
+
+    // Set or clear the bit at the specified position
+    if (bitValue) {
+      byteValue |= (1 << bitPosition); // Set the bit to 1
+    } else {
+      byteValue &= ~(1 << bitPosition); // Clear the bit to 0
+    }
+
+    // Write the new byte value back to the MCP output register
+    // console.log("GPIO STATE: " + zeroPad(byteValue.toString(2), 8));
+    this.registerWrite(OLAT, byteValue);
+  }
+
+  MCP23009.prototype.byteWrite = function(value) {
+    
+    this.registerWrite(OLAT, value);
+
+    var gpio_state = this.registerRead(GPIO);
+    // console.log("GPIO STATE: " + zeroPad(gpio_state.toString(2), 8));
+  }
+
+  MCP23009.prototype.byteRead = function() {
 
     // Read the current GPIO state
     var gpio_state = this.registerRead(GPIO);
-    if (value === this.HIGH) {
-
-      gpio_state |= value << pin // Shift the 1 bit into place and OR with existing value
-      
-    } else {
-
-      gpio_state &= ~(0x01 << pin) // invert a 1 and SHIFT into place and AND with existing
-    }
-    
-    this.registerWrite(OLAT, gpio_state);
+    // console.log("GPIO STATE: " + zeroPad(gpio_state.toString(2), 8));
+    return gpio_state;
   }
 
   /**
-   * Read from any of the registers; namely, 
-   * IODIR = 0x00
-   * IPOL = 0x01
-   * GPINTEN = 0x02
-   * DEFVAL = 0x03
-   * INTCON = 0x04
-   * IOCON = 0x05
-   * GPPU = 0x06
-   * INTF = 0x07
-   * INTCAP = 0x08
-   * GPIO = 0x09
-   * OLAT = 0x0A
+   * Write to a PIN
    * 
+   * @pin  The PIN to write to from 0 to 7
+   * @value Boolean HIGH or LOW
+   */
+  MCP23009.prototype.pinRead= function (pin) {
+
+    // Read the current GPIO state
+    var gpio_state = this.registerRead(GPIO);
+    // console.log("GPIO STATE: " + zeroPad(gpio_state.toString(2), 8));
+    return (gpio_state & (1 << pin)) !== 0;
+  }
+
+  /**
    * @register The specified register to read from
    */
   MCP23009.prototype.registerRead = function (register) {
@@ -104,7 +117,7 @@ var MCP23009 = (function () {
     var buf = Buffer.alloc(1);
     this.wire.readI2cBlockSync(this.address, register, 1, buf);
     var binary = buf[0].toString(2)
-    this.log(_stringForRegister(register) + " READ : " + zeroPad(binary, 8));
+    // console.log(_stringForRegister(register) + " READ : " + zeroPad(binary, 8));
     return buf[0];
   }
 
@@ -127,31 +140,18 @@ var MCP23009 = (function () {
    */
   MCP23009.prototype.registerWrite = function (register, value) {
 
-    var buf = Buffer.from([0x00]);
+    var buf = Buffer.alloc(1);
 
-    this.wire.readI2cBlockSync(this.address, register, 1, buf);
-    var binary = buf[0].toString(2)
-    this.log(_stringForRegister(register) + " BEFORE  : " + zeroPad(binary, 8));
+    // this.wire.readI2cBlockSync(this.address, register, 1, buf);
+    // console.log(_stringForRegister(register) + " BEFORE  : " + zeroPad(buf[0].toString(2), 8));
     
-    buf = Buffer.from([value]);
+    buf[0] = value;
     this.wire.writeI2cBlockSync(this.address, register, buf.length, buf);
-    binary = value.toString(2)
-    this.log(_stringForRegister(register) + " WRITE   : " + zeroPad(binary, 8));
+    // console.log(_stringForRegister(register) + " WRITE   : " + zeroPad(buf[0].toString(2), 8));
 
-    this.wire.readI2cBlockSync(this.address, register, 1, buf);
-    binary = binary = buf[0].toString(2)
-    this.log(_stringForRegister(register) + " CONFIRM : " + zeroPad(binary, 8));
+    // this.wire.readI2cBlockSync(this.address, register, 1, buf);
+    // console.log(_stringForRegister(register) + " CONFIRM : " + zeroPad(buf[0].toString(2), 8))
   }
-
-  /**
-   * Log a message to the console if debugging is enabled
-   * @msg The string to write
-   */
-  MCP23009.prototype.log = function (msg) {
-    if (this.debug) {
-      console.log(msg);
-    }
-  };
 
   /**
    * Map name string to register address for logging
