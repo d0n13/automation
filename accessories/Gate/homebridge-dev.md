@@ -28,7 +28,7 @@ Run dev in a shell before installing the plugin code
 sudo hb-shell
 ```
 
-Go to the homebridge home folder and install the repo
+## **< NB > Go to the homebridge home folder and install the repo**
 ```
 cd
 git clone https://github.com/d0n13/automation.git 
