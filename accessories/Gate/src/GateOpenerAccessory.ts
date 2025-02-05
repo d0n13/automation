@@ -59,34 +59,33 @@ export class GateOpenerAccessory implements AccessoryPlugin {
 
     setInterval(() => {
 
-      enum GateState {
-        OPEN = 1,
-        CLOSED = 2,
-        UNKNOWN
+      let state;
+
+      if (this.gate.isOpen()) {
+        state = this.hap.Characteristic.CurrentDoorState.OPEN;
+      }
+      if (this.gate.isClosed()) {
+        state = this.hap.Characteristic.CurrentDoorState.CLOSED;
       }
 
-      let state = this.gate.isOpen() ? GateState.OPEN : GateState.UNKNOWN;
-      if (state === GateState.UNKNOWN) {
-        state = this.gate.isClosed() ? GateState.CLOSED : GateState.UNKNOWN;
-      }
+      if (state !== this.currentState) {
 
-      // Only log if the state has changed
-      if (state === GateState.OPEN) {
-        this.log.debug('Gate is open');
-        this.currentState = this.hap.Characteristic.CurrentDoorState.OPEN;
-      }
+        // Only log if the state has changed
+        if (state === this.hap.Characteristic.CurrentDoorState.OPEN) {
+          this.log.debug('Gate is open');
+          this.currentState = state;
+          this.gateService
+            .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
+            .updateValue(this.currentState);
+        }
 
-      if (state === GateState.CLOSED) {
-        this.log.debug('Gate is closed');
-        this.currentState = this.hap.Characteristic.CurrentDoorState.CLOSED;
-      }
-
-      if (state !== GateState.UNKNOWN) {
-        this.gateService
-          .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
-          .updateValue(this.currentState);
-
-        this.getCurrentGateState(); // Update the current state
+        if (state === this.hap.Characteristic.CurrentDoorState.CLOSED) {
+          this.log.debug('Gate is closed');
+          this.currentState = state;
+          this.gateService
+            .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
+            .updateValue(this.currentState);
+        }
       }
     }, 1000); // Check every second
   }
@@ -212,64 +211,6 @@ export class GateHoldAccessory implements AccessoryPlugin {
     ];
   }
 }
-
-// export class GatePedestrianAccessory implements AccessoryPlugin {
-
-//   private readonly log: Logging;
-//   private pedestrianOn = false;
-//   private name: string;
-
-//   private readonly switchService: Service;
-//   private readonly informationService: Service;
-//   private readonly gate: GateController;
-
-//   constructor(hap: HAP, log: Logging, name: string) {
-
-//     this.log = log;
-//     this.name = name;
-//     this.gate = new GateController(log);
-
-//     this.switchService = new hap.Service.Switch(name);
-
-//     this.switchService.getCharacteristic(hap.Characteristic.On)
-//       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-
-//         callback(undefined, this.pedestrianOn);
-//       })
-//       .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
-
-//         try {
-//           this.pedestrianOn = true;
-//           this.gate.pedestrian();
-
-//           setTimeout(() => {
-//             this.pedestrianOn = false;
-//             this.switchService.getCharacteristic(hap.Characteristic.On)
-//               .updateValue(this.pedestrianOn);
-//           }, 6000);
-
-//         } catch (error) {
-
-//           log.error('rpio failed: ' + error);
-//         }
-
-//         callback();
-//       });
-
-//     this.informationService = new hap.Service.AccessoryInformation()
-//       .setCharacteristic(hap.Characteristic.Manufacturer, manafacturer)
-//       .setCharacteristic(hap.Characteristic.SerialNumber, '4f909710-8785-11ec-a437-473ed6a28ef8')
-//       .setCharacteristic(hap.Characteristic.FirmwareRevision, version)
-//       .setCharacteristic(hap.Characteristic.Model, name);
-//   }
-
-//   getServices(): Service[] {
-//     return [
-//       this.informationService,
-//       this.switchService,
-//     ];
-//   }
-// }
 
 export class GateLightAccessory implements AccessoryPlugin {
 
