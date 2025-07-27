@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "a8447faf-e0a0-4c4a-ae53-4d4b28669151")
 	(paper "A4")
 	(title_block
@@ -18,6 +18,10 @@
 	(sheet
 		(at 177.8 83.82)
 		(size 13.97 39.37)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0)
@@ -56,6 +60,10 @@
 	(sheet
 		(at 107.95 83.82)
 		(size 13.97 39.37)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0)
@@ -92,8 +100,12 @@
 		)
 	)
 	(sheet
-		(at 66.04 76.2)
+		(at 49.53 76.2)
 		(size 26.67 26.67)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0)
@@ -104,7 +116,7 @@
 		)
 		(uuid "00000000-0000-0000-0000-000061381202")
 		(property "Sheetname" "Raspberry Box"
-			(at 66.04 75.4884 0)
+			(at 49.53 75.4884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -113,7 +125,7 @@
 			)
 		)
 		(property "Sheetfile" "RaspberryBox.kicad_sch"
-			(at 66.04 103.4546 0)
+			(at 49.53 103.4546 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -132,6 +144,10 @@
 	(sheet
 		(at 80.01 111.76)
 		(size 26.67 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0)
@@ -172,4 +188,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )
