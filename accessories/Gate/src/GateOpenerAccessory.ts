@@ -63,29 +63,26 @@ export class GateOpenerAccessory implements AccessoryPlugin {
 
       if (this.gate.isOpen()) {
         state = this.hap.Characteristic.CurrentDoorState.OPEN;
-      }
-      if (this.gate.isClosed()) {
+      } else if (this.gate.isClosed()) {
         state = this.hap.Characteristic.CurrentDoorState.CLOSED;
+      } else {
+        // If neither open nor closed, infer based on targetState
+        if (this.targetState === this.hap.Characteristic.TargetDoorState.OPEN) {
+          state = this.hap.Characteristic.CurrentDoorState.OPENING;
+        } else if (this.targetState === this.hap.Characteristic.TargetDoorState.CLOSED) {
+          state = this.hap.Characteristic.CurrentDoorState.CLOSING;
+        } else {
+          state = this.currentState; // fallback
+        }
       }
 
       if (state !== this.currentState) {
 
-        // Only log if the state has changed
-        if (state === this.hap.Characteristic.CurrentDoorState.OPEN) {
-          this.log.debug('Gate is open');
-          this.currentState = state;
-          this.gateService
-            .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
-            .updateValue(this.currentState);
-        }
-
-        if (state === this.hap.Characteristic.CurrentDoorState.CLOSED) {
-          this.log.debug('Gate is closed');
-          this.currentState = state;
-          this.gateService
-            .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
-            .updateValue(this.currentState);
-        }
+        this.log.debug('Gate state changed: ' + this.currentState + ' -> ' + state);
+        this.currentState = state;
+        this.gateService
+          .getCharacteristic(this.hap.Characteristic.CurrentDoorState)
+          .updateValue(this.currentState);
       }
     }, 1000); // Check every second
   }
@@ -230,23 +227,21 @@ export class GateLightAccessory implements AccessoryPlugin {
 
     this.switchService = new hap.Service.Lightbulb(name);
 
+    // Initialize switchOn from hardware state
+    this.switchOn = this.gate.getGatePostLightsState();
+
     this.switchService.getCharacteristic(hap.Characteristic.On)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-
-        callback(undefined, this.switchOn);
+        // Always return the real hardware state
+        callback(undefined, this.gate.getGatePostLightsState());
       })
       .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
-
         try {
-
-          this.switchOn = !this.switchOn;
-          this.gate.gatePostLights(this.switchOn ? true : false);
-
+          this.switchOn = !!value;
+          this.gate.gatePostLights(this.switchOn);
         } catch (error) {
-
           log.error('rpio failed: ' + error);
         }
-
         callback();
       });
 
