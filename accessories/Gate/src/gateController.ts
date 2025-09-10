@@ -3,8 +3,8 @@ import mcp23009 from 'mcp23009';
 import rpio from 'rpio';
 import { runInThisContext } from 'vm';
 
-const GPIO_GATE_LIGHTS = 11;
-const GPIO_AUX_LIGHT = 29;
+const GPIO_GATE_LIGHTS = 13;
+const GPIO_AUX_LIGHT = 11;
 const MCP23009_ADDR = 0x27;
 const IODIR = 0x00;
 const START = 7;
@@ -45,6 +45,19 @@ export class GateController {
   }
 
   start(): void {
+    // Store the current state of the gate lights
+    const prevState = rpio.read(GPIO_GATE_LIGHTS);
+
+    // Flash the gate lights quickly 5 times
+    for (let i = 0; i < 5; i++) {
+      rpio.write(GPIO_GATE_LIGHTS, HIGH);
+      rpio.msleep(80);
+      rpio.write(GPIO_GATE_LIGHTS, LOW);
+      rpio.msleep(80);
+    }
+
+    // Restore the previous state
+    rpio.write(GPIO_GATE_LIGHTS, prevState);
 
     this.log.info(this.name + ': Start Pulse');
     this.mcp.pinWrite(START, HIGH);
@@ -80,14 +93,14 @@ export class GateController {
 
   gatePostLights(onoff: boolean): void {
 
-    rpio.write(GPIO_GATE_LIGHTS, onoff ? HIGH : LOW);
+    rpio.write(GPIO_GATE_LIGHTS, !onoff ? LOW : HIGH);
     const actionText = onoff ? 'Post Lights ON' : 'Post Lights OFF';
     this.log.info(this.name + ' ' + actionText);
   }
 
   auxiliaryLights(onoff: boolean): void {
 
-    rpio.write(GPIO_AUX_LIGHT, onoff ? HIGH : LOW);
+    rpio.write(GPIO_AUX_LIGHT, onoff ? LOW : HIGH);
     const actionText = onoff ? 'Auxilary Lights ON' : 'Auxilary Lights OFF';
     this.log.info(this.name + ' ' + actionText);
   }
@@ -100,5 +113,10 @@ export class GateController {
   isClosed(): boolean {
 
     return this.mcp.pinRead(CLOSED);
+  }
+
+  getGatePostLightsState(): boolean {
+    // Read the current state of the gate post lights from hardware
+    return rpio.read(GPIO_GATE_LIGHTS) === HIGH;
   }
 }
